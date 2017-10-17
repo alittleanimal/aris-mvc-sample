@@ -39,7 +39,7 @@
       <div class="control-group  ${nameErrorCheck}">
         <label class="control-label" for="loginInputName">user name</label>
         <div class="controls">
-          <form:input path="name" class="input-large" id="loginInputName" name="name" type="text" placeholder="name"/>
+          <form:input path="name" class="input-large" id="loginInputName" name="name" type="text" placeholder="name" value = "test1"/>
           <form:errors path="name"  cssClass="text-error help-inline"/>
         </div>
       </div>
@@ -52,7 +52,7 @@
       <div class="control-group ${passwordErrorCheck}">
         <label class="control-label" for="loginInputName">password</label>
         <div class="controls">
-          <form:input path="password" class="input-large" id="loginInputPassword" name="password" type="password" placeholder="password"/>
+          <form:input path="password" class="input-large" id="loginInputPassword" name="password" type="password" placeholder="password" value = "password"/>
           <form:errors path="password"  cssClass="text-error help-inline"/>
         </div>
       </div>
