@@ -223,4 +223,27 @@
 		t_stock.id		
 	</select>
 
+	<select id="selectByIdDetailedInfo" resultType = "com.accenture.aris.inventory.business.entity.StockInfoEntity"
+		parameterType = "int">
+		select 	t_stock.id,		
+		t_stock.dvd_id,			
+		t_item.ean_code as dvd_ean_code,								
+		t_item.title as dvd_title,						
+		t_item.package_img_path as dvd_package_img_path,												
+		t_warehouse.id as warehouse_id,								
+		t_warehouse.name as warehouse_name,										
+		t_warehouse.address as warehouse_address,											
+		t_warehouse.tel as warehouse_tel,									
+		t_stock.quantity				
+		from
+		t_stock, t_item, t_warehouse							
+		where
+		t_stock.dvd_id = t_item.id 						
+		and t_stock.warehouse_id = t_warehouse.id	
+		<if test="stockId != null">
+			and t_stock.id = #{id,jdbcType=INTEGER}	
+		</if>										
+											
+		
+	</select>
 </mapper>

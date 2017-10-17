@@ -42,4 +42,12 @@ public class StockServiceImpl implements StockService {
 		return result;
 	}
 
+	@Override
+	public ServiceResult<StockInfoEntity> readStockInfoService(int id) {
+		StockInfoEntity stockInfoEntity = stockRepository.selectByIdDetailedInfo(id);
+		ServiceResult<StockInfoEntity> result = new ServiceResult<StockInfoEntity>();
+		result.setAttribute("stock", stockInfoEntity);
+		return null;
+	}
+
 }

@@ -88,4 +88,6 @@ public interface StockRepository {
      * @return list
      */
     List<StockInfoEntity> selectByStockInfoEntity(StockInfoEntity entity,RowBounds rowBounds);
+    
+    StockInfoEntity selectByIdDetailedInfo(int id);
 }
