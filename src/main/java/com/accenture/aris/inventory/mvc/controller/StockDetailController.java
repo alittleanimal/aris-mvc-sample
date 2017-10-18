@@ -22,7 +22,7 @@ import com.accenture.aris.inventory.business.service.StockService;
 public class StockDetailController {
 	
 	private static final Logger LOGGER = LoggerFactory
-			.getLogger(StockSearchController.class);
+			.getLogger(StockDetailController.class);
 	
 	@Autowired
 	private Messages messages;
