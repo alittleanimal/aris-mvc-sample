@@ -10,7 +10,9 @@ import com.accenture.aris.core.support.ServiceResult;
 import com.accenture.aris.core.support.message.Messages;
 import com.accenture.aris.core.support.pagination.Pagination;
 import com.accenture.aris.core.support.pagination.PaginationUtils;
+import com.accenture.aris.inventory.business.entity.StockEntity;
 import com.accenture.aris.inventory.business.entity.StockInfoEntity;
+import com.accenture.aris.inventory.business.entity.StockTrackEntity;
 import com.accenture.aris.inventory.business.repository.StockRepository;
 import com.accenture.aris.inventory.business.service.StockService;
 
@@ -47,6 +49,13 @@ public class StockServiceImpl implements StockService {
 		StockInfoEntity stockInfoEntity = stockRepository.selectByIdDetailedInfo(id);
 		ServiceResult<StockInfoEntity> result = new ServiceResult<StockInfoEntity>();
 		result.setAttribute("stock", stockInfoEntity);
+		return result;
+	}
+
+	@Override
+	public ServiceResult<Boolean> updateStockService(StockEntity stockEntity,
+			StockTrackEntity stockTrackEntity) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -240,10 +240,7 @@
 		where
 		t_stock.dvd_id = t_item.id 						
 		and t_stock.warehouse_id = t_warehouse.id	
-		<if test="stockId != null">
-			and t_stock.id = #{id,jdbcType=INTEGER}	
-		</if>										
-											
-		
+		and t_stock.id = #{id,jdbcType=INTEGER}	
+												
 	</select>
 </mapper>
