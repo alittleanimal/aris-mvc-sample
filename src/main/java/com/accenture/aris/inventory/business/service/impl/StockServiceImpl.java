@@ -77,4 +77,21 @@ public class StockServiceImpl implements StockService {
 		
 	}
 
+	@Override
+	public ServiceResult<Boolean> updateStockService(StockEntity stockEntity) {
+		try {
+			int count1 = stockRepository.updateByPrimaryKeySelective(stockEntity);
+			
+			if (count1 == 1) {
+				return new ServiceResult<Boolean>(true); 
+			}else {
+				return new ServiceResult<Boolean>(false);
+			}
+		} catch (Exception e) {
+			ServiceResult<Boolean> result = new ServiceResult<Boolean>(false);
+	        result.setErrorCode("E0001");
+	        return result;
+		}
+	}
+
 }

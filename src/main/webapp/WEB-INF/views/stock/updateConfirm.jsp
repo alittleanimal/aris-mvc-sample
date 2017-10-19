@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -26,41 +26,42 @@
         <h4>please, check update information...</h4>
       </div>
       
-      <form id="stockUpdateForm" class="text-center" action="/aris/stock/update" method="post">
+      <spring:url var="stockUpdateUrl" value="/stock/update" />
+      <form:form id="stockUpdateForm" class="text-center" action="${stockUpdateUrl}" method="post" modelAttribute ="stockUpdateForm">
         <table class="table table-condensed update-confirm">
           <tr>
             <td><label for="dvdEanCode" class="text-right">DVD EAN CODE　:　</label></td>
-            <td>4988142580726</td>
+            <td>${stockUpdateForm.dvdEanCode}</td>
           </tr>
           <tr>
             <td><label class="text-right" for="dvdTitle">DVD TITLE　:　</label></td>
-            <td>Die Hard 4.0</td>
+            <td>${stockUpdateForm.dvdTitle}</td>
           </tr>
           <tr>
             <td><label class="text-right" for="warehouseId">WAREHOUSE ID　:　</label></td>
-            <td>TKY001</td>
+            <td>${stockUpdateForm.warehouseId}</td>
           </tr>
           <tr>
             <td><label class="text-right" for="warehouseName">WAREHOUSE NAME　:　</label></td>
-            <td>Shibuya 1st warehouse</td>
+            <td>${stockUpdateForm.warehouseName}</td>
           </tr>
           <tr>
             <td><label for="warehouseAddress" class="text-right">WAREHOUSE ADDRESS　:　</label></td>
-            <td>Udagawatyou 123-444-567, Shibuyaku, Tokyo</td>
+            <td>${stockUpdateForm.warehouseAddress}</td>
           </tr>
           <tr>
             <td><label for="warehouseTel" class="text-right">WAREHOUSE TEL　:　</label></td>
-            <td>03-1234-5678</td>
+            <td>${stockUpdateForm.warehouseTel}</td>
           </tr>
           <tr>
             <td><label for="quantity" class="text-right">QUANTITY　:　</label></td>
-            <td>1000</td>
+            <td>${stockUpdateForm.quantity}</td>
           </tr>
         </table>
-        
-        <a href="../stock/updateInput.html" class="btn"><i class="icon-arrow-left icon"></i>&nbsp; Return</a>
-        <a href="../stock/updateComplete.html" class="btn btn-danger"><i class="icon-ok-sign icon-white icon"></i>&nbsp; Update</a>
-      </form>
+        <spring:url var="returnUrl" value="/stock/updateReInput" />
+        <a href="${returnUrl}" class="btn"><i class="icon-arrow-left icon"></i>&nbsp; Return</a>
+        <button type="submit" class="btn btn-danger" name="update"><i class="icon-ok-sign icon-white icon"></i>&nbsp; Update</button>
+      </form:form>
     
     </div>
     

@@ -38,54 +38,55 @@
         <!-- UPDATE FORM -->
         <div class="text-center"><h4>STOCK UPDATE</h4></div>
         <spring:url var="updateConfirm" value="/stock/updateConfirm" />
-        <form:form id="stockUpdateForm" class="form-horizontal" action="${updateConfirm}" method="post">
-        	<c:set var = "stock" value = "${stock}"/>
+        <form:form id="stockUpdateForm" class="form-horizontal" action="${updateConfirm}" method="post" modelAttribute = "stockUpdateForm">
+
+        	<!-- <c:set var = "stock" value = "${stock}"/> -->
           <div class="control-group">
             <label for="dvdEanCode" class="control-label">DVD EAN CODE</label>
             <div class="controls">
-              <input id="dvdEanCode" name="dvdEanCode" class="input-large span4" readonly="readonly" type="text" value="${stock.dvdEanCode}"/>
+              <form:input path = "dvdEanCode" id="dvdEanCode" name="dvdEanCode" class="input-large span4" readonly="readonly" type="text" value="${stockUpdateForm.dvdEanCode}"/>
             </div>
           </div>
           
           <div class="control-group ">
             <label for="dvdTitle" class="control-label">DVD TITLE</label>
             <div class="controls">
-              <input id="dvdTitle" name="dvdTitle" class="input-large span4" readonly="readonly" type="text" value="${stock.dvdTitle}"/>
+              <form:input path = "dvdTitle" id="dvdTitle" name="dvdTitle" class="input-large span4" readonly="readonly" type="text" value="${stockUpdateForm.dvdTitle}"/>
             </div>
           </div>
 
           <div class="control-group">
             <label for="warehouseId" class="control-label">WAREHOUSE ID</label>
             <div class="controls">
-              <input id="warehouseId" name="warehouseId" class="input-large span4" readonly="readonly" type="text" value="${stock.warehouseId}"/>
+              <form:input path = "warehouseId" id="warehouseId" name="warehouseId" class="input-large span4" readonly="readonly" type="text" value="${stockUpdateForm.warehouseId}"/>
             </div>
           </div>
 
           <div class="control-group">
             <label for="warehouseName" class="control-label">WAREHOUSE NAME</label>
             <div class="controls">
-              <input id="warehouseName" name="warehouseName" class="input-large span4" readonly="readonly" type="text" value="${stock.warehouseName}"/>
+              <form:input path = "warehouseName" id="warehouseName" name="warehouseName" class="input-large span4" readonly="readonly" type="text" value="${stockUpdateForm.warehouseName}"/>
             </div>
           </div>
 
           <div class="control-group">
             <label for="warehouseAddress" class="control-label">WAREHOUSE ADDRESS</label>
             <div class="controls">
-              <input id="warehouseAddress" name="warehouseAddress" class="input-large span4" readonly="readonly" type="text" value="${stock.warehouseAddress}"/>
+              <form:input path = "warehouseAddress" id="warehouseAddress" name="warehouseAddress" class="input-large span4" readonly="readonly" type="text" value="${stockUpdateForm.warehouseAddress}"/>
             </div>
           </div>
 
           <div class="control-group">
             <label for="warehouseTel" class="control-label">WAREHOUSE TEL</label>
             <div class="controls">
-              <input id="warehouseTel" name="warehouseTel" class="input-large span4" readonly="readonly" type="text" value="${stock.warehouseTel}"/>
+              <form:input path = "warehouseTel" id="warehouseTel" name="warehouseTel" class="input-large span4" readonly="readonly" type="text" value="${stockUpdateForm.warehouseTel}"/>
             </div>
           </div>
 
           <div class="control-group">
             <label for="quantity" class="control-label">QUANTITY</label>
             <div class="controls">
-              <input id="quantity" name="quantity" class="input-large span4" type="text" value="${stock.quantity}"/>
+              <form:input path = "quantity" id="quantity" name="quantity" class="input-large span4" type="text" value="${stockUpdateForm.quantity}"/>
             </div>
           </div>
 

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.accenture.aris.core.support.ServiceResult;
 import com.accenture.aris.core.support.message.Messages;
 import com.accenture.aris.inventory.business.entity.StockInfoEntity;
+import com.accenture.aris.inventory.business.entity.StockTrackEntity;
 import com.accenture.aris.inventory.business.service.StockService;
 import com.accenture.aris.inventory.mvc.form.StockUpdateForm;
 
@@ -78,14 +79,15 @@ public class StockUpdateController {
 	 */
 	@RequestMapping(value = "/updateConfirm")
 	public String updateConfirmAction(@Valid StockUpdateForm stockUpdateForm, BindingResult result, Model uiModel){
-		/*if (result.hasErrors()) {
+		if (result.hasErrors()) {
 			LOGGER.debug("invalid request.");
 			return "stock/updateInput";
-		}*/
+		}
 		
 		StockInfoEntity stockInfoEntity = new StockInfoEntity();
 		BeanUtils.copyProperties(stockUpdateForm, stockInfoEntity);
 		
+		uiModel.addAttribute("stockUpdateForm", new StockUpdateForm());
 		return "stock/updateConfirm";
 	}
 	
@@ -100,8 +102,13 @@ public class StockUpdateController {
 	public String updateAction(StockUpdateForm stockUpdateForm, Model uiModel,HttpServletRequest request){
 		StockInfoEntity stockInfoEntity = new StockInfoEntity();
 		BeanUtils.copyProperties(stockUpdateForm, stockInfoEntity);
+		//StockTrackEntity stockTrackEntity = new StockTrackEntity();
 		
-		//stockService.updateStockService(stockEntity, stockTrackEntity)
+		try {
+			stockService.updateStockService(stockInfoEntity);
+        } catch(Exception e) {
+            return "stock/userUpdateConfirm";
+        } 
 		
 		return "stock/updateComplete";
 	}
