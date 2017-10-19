@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<spring:url var="ajax" value="/user/jsonDetail/" />
 <script type="text/javascript">
   $(document).ready(function() {
     $(".autocomplete").autocomplete({
@@ -21,6 +22,23 @@
     $('#upload').click(function() {
       $('#dialog').dialog("open");
     })
+    
+   $("#ajaxButton").click(function(){
+	 var id = $('#ajaxButton').attr("data");
+        $.ajax({
+        	type: 'GET',
+            url: '${ajax}'+id,
+            dataType: "json",
+            success: function(result){
+              alert(result.email);
+              $("#email_val").html(result.email);
+              $("#email_val").val(result.email);
+              
+              $("#dialog2").show();
+            }
+        });
+ 	});
+    
   });
 
   jQuery(function($) {
@@ -30,6 +48,7 @@
       }
     });
   });  
+  
 </script>
 
 <div class="row">
@@ -127,7 +146,7 @@
             <tbody>
               <c:forEach var="user" items="${users}">
                 <spring:url var="userRefUrl" value="/user/detail/${user.id}" />
-                <tr data-href="${userRefUrl}">
+                <tr>
                   <td><c:out value="${user.id}"></c:out></td>
                   <td><c:out value="${user.name}"></c:out></td>
                   <td><c:out value="${user.roleId}"></c:out></td>
@@ -135,10 +154,12 @@
                   <spring:url var="viewUrl" value="/user/detail/${user.id}"/>
                   <spring:url var="editUrl" value="/user/updateInput/${user.id}"/>
                   <spring:url var="deleteUrl" value="/user/deleteConfirm/${user.id}"/>
+                  
                   <td>
                     <a href="${viewUrl}" class="btn" title="view item"><i class="icon-search icon"></i></a>
                     <a href="${editUrl}" class="btn" title="edit item"><i class="icon-edit icon"></i></a>
                     <a href="${deleteUrl}" class="btn" title="delete item"><i class="icon-trash icon"></i></a>
+                    <a href="javascript:void(0);" class="btn" title="Ajax" id = "ajaxButton" data="${user.id}"></a>
                   </td>
                 </tr>
               </c:forEach>
@@ -161,6 +182,59 @@
       </div>
     </div>
   </div>
+  
+   <!-- add center space -->
+      <div class="span8" id = "dialog2" style = "display:none">
+        <div class="text-center">
+          <h4>User Detail</h4>
+        </div>
+        <table class="table table-condensed detail">
+          <thead>
+          </thead>
+          <tbody>
+            <tr>
+              <td><label for="id" class="pull-right">id　:　</label></td>
+              <td><c:out value="${userDetailForm.id}" /></td>
+            </tr>
+            <tr>
+              <td><label class="pull-right" for="name">name　:　</label></td>
+              <td><c:out value="${userDetailForm.name}" /></td>
+            </tr>
+            <tr>
+              <td><label for="roleId" class="pull-right">role　:　</label></td>
+              <td><c:out value="${userDetailForm.roleId}" /></td>
+            </tr>
+            <tr>
+              <td><label class="pull-right" for="email">email　:　</label></td>
+              <td id="email_val"></td>
+            </tr>
+            <tr>
+              <td><label for="sex" class="pull-right">sex　:　</label></td>
+              <td><c:out value="${userDetailForm.sex}" /></td>
+            </tr>
+            <tr>
+              <td><label for="nationality" class="pull-right">nationality　:　</label></td>
+              <td><c:out value="${userDetailForm.nationality}" /></td>
+            </tr>
+            <tr>
+              <td><label for="text" class="pull-right">text　:　</label></td>
+              <td><c:out value="${userDetailForm.text}" /></td>
+            </tr>
+            <tr>
+              <spring:url value="/user/updateInput/${userDetailForm.id}" var="updateUrl"/>
+              <spring:url value="/user/deleteConfirm/${userDetailForm.id}" var="detailUrl"/>
+              <td colspan="2">
+                <div class="text-center">
+                <a href="${updateUrl}" class="btn"><i class="icon-edit" style="margin-top: 1px;"></i>&nbsp; Update</a>
+                <a href="${detailUrl}" class="btn"><i class="icon-trash" style="margin-top: 1px;"></i>&nbsp; Delete</a>
+                </div>
+              </td>
+            </tr>
+          </tbody>  
+        </table>
+        <br>
+      </div>
+  
 </div>
 <div id="dialog">
   <form:form name="userUploadForm" action="${uploadUrl}" method="post" cssClass="form-horizontal" enctype="multipart/form-data" modelAttribute="userUploadForm">

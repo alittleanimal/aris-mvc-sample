@@ -82,9 +82,10 @@
                   <td><c:out value="${stock.quantity}"></c:out></td>
                 </tr>
                 <tr>
+                <spring:url value="/stock/updateInput/${stock.id}" var="updateUrl"/>
                   <td colspan="2">
                     <div class="text-center">
-                      <a href="../stock/updateInput.html" class="btn"><i class="icon-edit" style="margin-top: 1px;"></i>&nbsp; Update</a>
+                      <a href="${updateUrl}" class="btn"><i class="icon-edit" style="margin-top: 1px;"></i>&nbsp; Update</a>
                     </div>
                   </td>
                 </tr>

@@ -14,6 +14,7 @@ import com.accenture.aris.inventory.business.entity.StockEntity;
 import com.accenture.aris.inventory.business.entity.StockInfoEntity;
 import com.accenture.aris.inventory.business.entity.StockTrackEntity;
 import com.accenture.aris.inventory.business.repository.StockRepository;
+import com.accenture.aris.inventory.business.repository.StockTrackRepository;
 import com.accenture.aris.inventory.business.service.StockService;
 
 @Service
@@ -25,6 +26,9 @@ public class StockServiceImpl implements StockService {
 
 	@Autowired
 	private StockRepository stockRepository;
+	
+	@Autowired
+	private StockTrackRepository stockTrackRepository;
 
 	@Override
 	public ServiceResult<Void> searchStockInfoService(StockInfoEntity entity,
@@ -55,8 +59,22 @@ public class StockServiceImpl implements StockService {
 	@Override
 	public ServiceResult<Boolean> updateStockService(StockEntity stockEntity,
 			StockTrackEntity stockTrackEntity) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		try {
+			int count1 = stockRepository.updateByPrimaryKeySelective(stockEntity);
+			int count2 = stockTrackRepository.updateByPrimaryKeySelective(stockTrackEntity);
+			
+			if (count1 == 1 && count2 == 1) {
+				return new ServiceResult<Boolean>(true); 
+			}else {
+				return new ServiceResult<Boolean>(false);
+			}
+		} catch (Exception e) {
+			ServiceResult<Boolean> result = new ServiceResult<Boolean>(false);
+	        result.setErrorCode("E0001");
+	        return result;
+		}
+		
 	}
 
 }

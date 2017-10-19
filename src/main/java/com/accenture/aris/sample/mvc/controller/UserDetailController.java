@@ -11,11 +11,13 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.accenture.aris.core.support.codeloader.CodeLoader;
 import com.accenture.aris.core.support.codeloader.StaticCodeLoader;
 import com.accenture.aris.core.support.message.Messages;
-
 import com.accenture.aris.sample.mvc.form.UserDetailForm;
+import com.accenture.aris.sample.business.entity.UserEntity;
 import com.accenture.aris.sample.business.service.UserService;
 
 
@@ -47,4 +49,12 @@ public class UserDetailController {
         BeanUtils.copyProperties(userService.searchUserService(id).getResult(), userDetailForm);
         return "user/userDetail";
     }
+    
+    @RequestMapping(value = "jsonDetail/{id}")
+    @ResponseBody
+    public UserEntity detailJson(@PathVariable("id") String id){
+    	UserEntity userEntity = userService.searchUserService(id).getResult();
+    	return userEntity;
+    }//www.getpostman.com
+    
 }
